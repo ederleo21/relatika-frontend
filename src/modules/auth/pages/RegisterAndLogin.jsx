@@ -5,12 +5,8 @@ export const RegisterAndLogin = () => {
 
   return (
     <div>
-      <h1>
-        Formulario de registro y login
-      </h1>
-      <div>
+        <h1>Formularios de registro y login</h1>
         <RegisterForm/>
-      </div>
     </div>
   )
 }
