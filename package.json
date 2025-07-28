@@ -13,6 +13,8 @@
     "@fontsource/lora": "^5.2.6",
     "@fontsource/poppins": "^5.2.6",
     "axios": "^1.10.0",
+    "flowbite": "^3.1.2",
+    "flowbite-react": "^0.12.4",
     "formik": "^2.4.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

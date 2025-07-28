@@ -28,12 +28,12 @@ const initialValues = {
   last_name: "",
 }
 
-const handleSubmit = (values) =>  {
+const handleSubmit = (values, { resetForm }) =>  {
   console.log(values)
+  resetForm()
 }
 
 export const RegisterForm = () => {
-
   return (
     <section>
       <Formik
