@@ -1,7 +1,10 @@
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
+import { toast } from 'react-toastify';
 
 import { InputField } from '../../../global/components/atoms/InputField';
+import { Button } from '../../../global/components/atoms/Button';
+import { registerUser } from '../services/authService';
 
 const validationSchema = Yup.object({
   username: Yup.string().required("Campo requerido"),
@@ -13,7 +16,7 @@ const validationSchema = Yup.object({
     .matches(/[0-9]/, "Debe contener al menos un número")
     .required("Campo requerido"),
   password2: Yup.string()
-  .oneOf([Yup.ref('password'), null], "Las contraseñas no coinciden")
+  .oneOf([Yup.ref('password'), undefined], "Las contraseñas no coinciden")
   .required("Campo requerido"),
   first_name: Yup.string(),
   last_name: Yup.string(),
@@ -28,19 +31,35 @@ const initialValues = {
   last_name: "",
 }
 
-const handleSubmit = (values, { resetForm }) =>  {
-  console.log(values)
-  resetForm()
+const handleSubmit = async(values, { resetForm, setSubmitting, setErrors }) =>  {
+  try {
+    await registerUser(values);
+    toast.success("Usuario registrado con éxito");
+    resetForm();
+  } catch(error) {
+    if (error.response && error.response.data) {
+        const data = error.response.data;
+        setErrors(data);
+        if (data.non_field_errors) {
+          toast.error(data.non_field_errors.join(" "));
+        }
+    } else {
+      toast.error("Error inesperado. Intenta más tarde.");
+    }
+  } finally { 
+    setSubmitting(false);
+  }
 }
 
 export const RegisterForm = () => {
   return (
     <section>
       <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
+      {({ isSubmitting }) => (
         <Form>
           <div className='grid grid-cols-2 gap-x-5 gap-y-4 px-5 font-poppins'>
             <InputField name="first_name" placeholder="Nombre" label="Nombre" />
@@ -51,8 +70,10 @@ export const RegisterForm = () => {
             <InputField name="password2" type='password' placeholder="Confirmar contraseña" label="Confirmar contraseña" className='col-span-2' />
           </div>
 
-          <button type="submit">Enviar</button>
+          <Button type='submit' text={isSubmitting ? "Enviando..." : "Enviar"} className='bg-indigo-600 hover:bg-indigo-700' disabled={isSubmitting} />
+          <Button text='Cancelar' className='bg-red-600'/>
         </Form>
+      )}
       </Formik>
     </section>
   );
