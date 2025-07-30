@@ -1,10 +1,10 @@
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
-import { toast } from 'react-toastify';
 
 import { InputField } from '../../../global/components/atoms/InputField';
 import { Button } from '../../../global/components/atoms/Button';
 import { registerUser } from '../services/authService';
+import { handleFormSubmit } from '../../../global/utils/handleFormSubmit';
 
 const validationSchema = Yup.object({
   username: Yup.string().required("Campo requerido"),
@@ -31,24 +31,8 @@ const initialValues = {
   last_name: "",
 }
 
-const handleSubmit = async(values, { resetForm, setSubmitting, setErrors }) =>  {
-  try {
-    await registerUser(values);
-    toast.success("Usuario registrado con éxito");
-    resetForm();
-  } catch(error) {
-    if (error.response && error.response.data) {
-        const data = error.response.data;
-        setErrors(data);
-        if (data.non_field_errors) {
-          toast.error(data.non_field_errors.join(" "));
-        }
-    } else {
-      toast.error("Error inesperado. Intenta más tarde.");
-    }
-  } finally { 
-    setSubmitting(false);
-  }
+const handleSubmit = (values, actions) =>  {
+  handleFormSubmit({values, requestFn: registerUser, messageSuccess:"Te has registrado con éxito!"}, actions)
 }
 
 export const RegisterForm = () => {
@@ -71,7 +55,6 @@ export const RegisterForm = () => {
           </div>
 
           <Button type='submit' text={isSubmitting ? "Enviando..." : "Enviar"} className='bg-indigo-600 hover:bg-indigo-700' disabled={isSubmitting} />
-          <Button text='Cancelar' className='bg-red-600'/>
         </Form>
       )}
       </Formik>

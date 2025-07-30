@@ -7,3 +7,12 @@ export const registerUser = async(userData) => {
     const response = await api.post(endpoints.auth.register, userData)
     return response.data
 }
+
+export const loginUser = async(data) => {
+    const response = await api.post(endpoints.auth.login, data)
+    const accessToken = response.data.access;
+    if(accessToken){
+        localStorage.setItem('accessToken', accessToken);
+    }
+    return response.data
+}

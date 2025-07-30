@@ -11,6 +11,7 @@ export const api = axios.create({
     withCredentials: true, //Permite que se envien cookies
 });
 
+
 //Agrega el token de acceso a cada petición saliente
 api.interceptors.request.use(
     (config) => {
@@ -23,13 +24,17 @@ api.interceptors.request.use(
     (error) => Promise.reject(error)
 );
 
-//Interceptor para manejar errores de autenticación y renovar el access token
+
+//Interceptor para manejar errores de autenticación y renovar el access. Cuando se intenta hacer login no se renueva.
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    const isLoginEndpoint = originalRequest.url.includes('/login/');
+    const isRefreshEndpoint = originalRequest.url.includes('/refresh/');
+
+    if (error.response?.status === 401 && !originalRequest._retry && !isLoginEndpoint && !isRefreshEndpoint ){
       originalRequest._retry = true;
 
       try {
