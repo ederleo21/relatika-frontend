@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { performLogout } from '../modules/auth/logic/handleLogout';
 
 //Configuración de variable con BASE_URL e interceptores para manejar tokens
 
@@ -49,8 +50,11 @@ api.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccess}`;
 
         return api(originalRequest);
+
       } catch (err) {
         console.error('Error al renovar el token:', err);
+        await performLogout();
+        window.location.href = "/"
         return Promise.reject(err);
       }
     }

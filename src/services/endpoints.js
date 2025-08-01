@@ -4,7 +4,8 @@ export const endpoints = {
     auth: {
         register: "/users/register/",
         login: "/users/login/",
-        refresh: "/users/refresh/"
+        refresh: "/users/refresh/",
+        logout: "/users/logout/"
     },
     users: {
         profile: "/users/profile/",

@@ -1,5 +1,6 @@
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
+import { useNavigate } from 'react-router-dom'
 
 import { InputField } from '../../../global/components/atoms/InputField'
 import { Button } from '../../../global/components/atoms/Button'
@@ -15,12 +16,17 @@ const initialValues = {
     username: "",
     password: ""
 }
-
-const handleSubmit = (values, actions) => {
-    handleFormSubmit({values, requestFn: loginUser, messageSuccess: "Bienvenido a Relatika!"}, actions)
-}
-
 export const LoginForm = () => {
+  const navigate = useNavigate();
+  
+  const handleSubmit = (values, actions) => {
+      handleFormSubmit({values, 
+                        requestFn: loginUser, 
+                        messageSuccess: "Bienvenido a Relatika!",
+                        onSuccess: () => navigate("/home")
+                      }, actions)
+  }
+
   return (
     <section>
       <Formik

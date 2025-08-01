@@ -1,12 +1,15 @@
 import { toast } from "react-toastify"
 
-export const handleFormSubmit = async({ values, requestFn, messageSuccess="Operación exitosa"}, actions) => {
+export const handleFormSubmit = async({ values, requestFn, messageSuccess="Operación exitosa", onSuccess = null}, actions) => {
     const { resetForm, setErrors, setSubmitting } = actions;
     
     try{
         await requestFn(values);
         toast.success(messageSuccess);
         resetForm();
+        if(onSuccess){
+            onSuccess()
+        }
 
     }catch(error){
         if (error.response && error.response.data){
