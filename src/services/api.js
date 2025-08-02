@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { performLogout } from '../modules/auth/logic/handleLogout';
+import { store } from '../stores/store';
+import { clearAuthUser } from '../modules/auth/slices/authUserSlice';
 
 //Configuración de variable con BASE_URL e interceptores para manejar tokens
 
@@ -54,6 +56,7 @@ api.interceptors.response.use(
       } catch (err) {
         console.error('Error al renovar el token:', err);
         await performLogout();
+        store.dispatch(clearAuthUser())
         window.location.href = "/"
         return Promise.reject(err);
       }

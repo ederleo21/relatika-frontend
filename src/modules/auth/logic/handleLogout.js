@@ -1,5 +1,6 @@
 import { logout } from "../services/authService";
 import { toast } from "react-toastify";
+import { clearAuthUser } from '../slices/authUserSlice'
 
 export const performLogout = async () => {
   try {
@@ -11,8 +12,9 @@ export const performLogout = async () => {
   }
 };
 
-export const handleLogout = async ({ navigate }) => {
+export const handleLogout = async ({ navigate, dispatch }) => {
   await performLogout();
+  dispatch(clearAuthUser())
   toast.success("Sesión cerrada");
   navigate("/");
 };
