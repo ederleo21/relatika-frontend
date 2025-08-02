@@ -19,3 +19,8 @@ export const loginUser = async(data) => {
 export const logout = async() => {
     return await api.post(endpoints.auth.logout, {}, { withCredentials: true });
 }
+
+export const getProfile = async() => {
+    const response = await api.get(endpoints.auth.profile)
+    return response.data
+}

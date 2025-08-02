@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-
 import { handleLogout } from '../logic/handleLogout'
 
 export const Home = () => {

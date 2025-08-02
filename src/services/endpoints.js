@@ -5,10 +5,10 @@ export const endpoints = {
         register: "/users/register/",
         login: "/users/login/",
         refresh: "/users/refresh/",
-        logout: "/users/logout/"
+        logout: "/users/logout/",
+        profile: "/users/profile/" //get, update, delete user auth
     },
     users: {
-        profile: "/users/profile/",
         list: "/users/users/"
     }
 }
