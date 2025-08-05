@@ -7,7 +7,7 @@ import { clearAuthUser } from '../modules/auth/slices/authUserSlice';
 
 //Instancia de axios para llamadas a la API
 export const api = axios.create({
-    baseURL: 'http://localhost:8000/api/v1',
+    baseURL: 'http://127.0.0.1:8000/api/v1/',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -36,28 +36,28 @@ api.interceptors.response.use(
 
     const isLoginEndpoint = originalRequest.url.includes('/login/');
     const isRefreshEndpoint = originalRequest.url.includes('/refresh/');
+    const isLogoutEndpoint = originalRequest.url.includes('/logout/');
 
-    if (error.response?.status === 401 && !originalRequest._retry && !isLoginEndpoint && !isRefreshEndpoint ){
+    if (error.response?.status === 401 && !originalRequest._retry && !isLoginEndpoint && !isRefreshEndpoint && !isLogoutEndpoint){
       originalRequest._retry = true;
 
       try {
-        const res = await axios.post(
-          'http://127.0.0.1:8000/api/v1/users/refresh/',
-          {},
+        const res = await axios.post('http://127.0.0.1:8000/api/v1/users/refresh/', {},
           { withCredentials: true }
         );
 
         const newAccess = res.data.access;
         localStorage.setItem('accessToken', newAccess);
-        originalRequest.headers.Authorization = `Bearer ${newAccess}`;
-
+        console.log("Access actualizado con éxito.")
+        
+        originalRequest.headers = {...originalRequest.headers, Authorization: `Bearer ${newAccess}`,};
         return api(originalRequest);
 
       } catch (err) {
         console.error('Error al renovar el token:', err);
         await performLogout();
-        store.dispatch(clearAuthUser())
-        window.location.href = "/"
+        store.dispatch(clearAuthUser());
+        window.location.href = "/";
         return Promise.reject(err);
       }
     }
@@ -65,4 +65,3 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
- 
