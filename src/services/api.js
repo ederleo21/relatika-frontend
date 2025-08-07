@@ -34,6 +34,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    //endpoints en los que no se debe renovar si fallan
     const isLoginEndpoint = originalRequest.url.includes('/login/');
     const isRefreshEndpoint = originalRequest.url.includes('/refresh/');
     const isLogoutEndpoint = originalRequest.url.includes('/logout/');

@@ -1,12 +1,10 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { getProfile } from '../services/authService'
 import { setAuthUser, setLoading } from '../slices/authUserSlice'
 
 export const useFetchProfile = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,7 +18,7 @@ export const useFetchProfile = () => {
             }
         }
         getUserProfile()
-    }, [navigate])
+    }, [dispatch])
 
   return null
 }

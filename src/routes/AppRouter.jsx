@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { RegisterAndLogin } from '../modules/auth/pages/RegisterAndLogin'
+import { RegisterAndLogin } from '../modules/auth/pages/RegisterAndLoginPage'
 import { Home } from '../modules/auth/pages/Home';
-import { Layout } from '../global/components/Layout';
+import { Layout } from '../modules/auth/components/Layout';
 
 export const AppRouter = () => {
 
