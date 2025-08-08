@@ -9,9 +9,7 @@ import {App} from './App'
 import { store } from './stores/store';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </StrictMode>,
 )

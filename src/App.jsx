@@ -5,10 +5,7 @@ export const App = () => {
   return (
     <>
       <AppRouter/>
-      <ToastContainer 
-        autoClose={1500} 
-        toastClassName="font-poppins font-semibold" 
-        position="top-center"
+      <ToastContainer autoClose={1000} toastClassName="font-poppins font-semibold" position="top-center"
       />
     </>
   )
