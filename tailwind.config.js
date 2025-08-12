@@ -14,7 +14,7 @@ export default {
         lighttext: '#60697B',
         darktext: '#343F52',
         red_coral: '#EF4444',  
-        indigo_light: '#776BFF' 
+        indigo_light: '#4f46e5' 
       },  
       fontFamily: {
           poppins: ['Poppins', 'sans-serif'], 

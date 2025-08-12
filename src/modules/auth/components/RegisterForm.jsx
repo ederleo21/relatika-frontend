@@ -43,20 +43,25 @@ export const RegisterForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-      {({ isSubmitting }) => (
-        <Form>
-          <div className='grid grid-cols-2 gap-x-5 gap-y-4 px-5 font-poppins'>
-            <InputField name="first_name" placeholder="Nombre" label="Nombre" />
-            <InputField name="last_name" placeholder="Apellido" label="Apellido" />
-            <InputField name="username" placeholder="Username" label="Username" />
-            <InputField name="email" placeholder="Email" label="Email" />
-            <InputField name="password" type='password' placeholder="Contraseña" label="Contraseña" className='col-span-2' />
-            <InputField name="password2" type='password' placeholder="Confirmar contraseña" label="Confirmar contraseña" className='col-span-2' />
-          </div>
+        {({ isSubmitting }) => (
+          <Form className="space-y-4">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-3 font-poppins">
+              <InputField name="first_name" placeholder="Nombre" label="Nombre" />
+              <InputField name="last_name" placeholder="Apellido" label="Apellido" />
+              <InputField name="username" placeholder="Usuario" label="Usuario" />
+              <InputField name="email" placeholder="Email" label="Email" />
+              <InputField name="password" type="password" placeholder="Contraseña" label="Contraseña" className="col-span-2"/>
+              <InputField name="password2" type="password" placeholder="Confirmar contraseña" label="Confirmar contraseña" className="col-span-2"/>
+            </div>
 
-          <Button type='submit' text={isSubmitting ? "Enviando..." : "Enviar"} className='bg-indigo-600 hover:bg-indigo-700' disabled={isSubmitting} />
-        </Form>
-      )}
+            <Button
+              type="submit"
+              text={isSubmitting ? "Espere..." : "Registrarse"}
+              className="w-full bg-indigo_light hover:bg-indigo-700 text-white py-2 rounded-lg shadow-md transition"
+              disabled={isSubmitting}
+            />
+          </Form>
+        )}
       </Formik>
     </section>
   );
