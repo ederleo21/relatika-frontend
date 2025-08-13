@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-import img from '../../../assets/RELATIKA.png'
+import img from '../../../assets/icon_relatikaa.png'
 import { BorderDesign } from '../../../global/components/atoms/BorderDesign'
 import { RegisterForm } from '../components/RegisterForm'
 import { LoginForm } from '../components/LoginForm'
@@ -11,14 +11,20 @@ export const RegisterAndLogin = () => {
 
   return (
     <div className="flex h-screen font-poppins">
-      <div className="hidden md:flex flex-1 bg-greybg justify-center items-center">
+      <div className="hidden md:flex flex-1 bg-greybg flex-col justify-center items-center px-10 text-center">
+        <h1 className="text-6xl xl:text-7xl font-bold text-darktext mb-4 font-lora">
+          RELATIKA
+        </h1>
+        <p className="text-base lg:text-lg xl:text-xl text-lighttext max-w-md">
+          Un espacio pensado para compartir perspectivas y enriquecer el diálogo.
+        </p>
         <img
-          src={img}
-          alt="Decoración"
-          className="w-full h-auto rounded-lg shadow-lg object-cover"
+          src={img} 
+          alt="Logo Relatika"
+          className="w-40 h-40 xl:w-60 xl:h-60 object-contain"
         />
       </div>
-
+      
       <div className="flex flex-1 bg-lightbg justify-center items-center relative px-5">
         <div className="relative w-full max-w-lg p-8 rounded-lg shadow-xl bg-lightbg">
           <BorderDesign/>
