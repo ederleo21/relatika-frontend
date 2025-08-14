@@ -6,9 +6,9 @@ import { PageLoader } from '../../../global/components/atoms/PageLoader'
 
 export const AuthLayout = () => {
   useFetchProfile()
-  const { loading } = useSelector((state) => state.authUser)
+  const { loading, authUser } = useSelector((state) => state.authUser)
 
-  if (loading) return  <PageLoader/>
+  if (loading || !authUser ) return  <PageLoader/>
 
   return <Outlet/>
 }

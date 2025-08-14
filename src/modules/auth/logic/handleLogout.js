@@ -12,9 +12,9 @@ export const performLogout = async () => {
   }
 };
 
-export const handleLogout = async ({ dispatch }) => {
+export const handleLogout = async (dispatch) => {
   await performLogout();
   dispatch(clearAuthUser())
   toast.success("Sesión cerrada");
-   window.location.href = "/";
+  window.location.href = "/";
 };
