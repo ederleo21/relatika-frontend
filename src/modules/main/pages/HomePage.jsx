@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-export const Home = () => {
+export const HomePage = () => {
   console.log("Home")
 
   return (

@@ -2,13 +2,12 @@
 
 export const endpoints = {
     auth: {
-        register: "/users/register/",
-        login: "/users/login/",
-        refresh: "/users/refresh/",
-        logout: "/users/logout/",
-        profile: "/users/profile/" //get, update, delete user auth
+        register: "/auth/register/",
+        login: "/auth/login/",
+        refresh: "/auth/refresh/",
+        logout: "/auth/logout/",
     },
     users: {
-        list: "/users/users/"
+        profile: "/users/profile/", //get, update, delete de user auth
     }
 }

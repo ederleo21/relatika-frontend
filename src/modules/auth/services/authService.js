@@ -21,6 +21,6 @@ export const logout = async() => {
 }
 
 export const getProfile = async() => {
-    const response = await api.get(endpoints.auth.profile)
+    const response = await api.get(endpoints.users.profile)
     return response.data
 }

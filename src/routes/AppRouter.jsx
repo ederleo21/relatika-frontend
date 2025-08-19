@@ -2,8 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { RegisterAndLogin } from '../modules/auth/pages/RegisterAndLoginPage'
 import { AuthLayout } from '../modules/auth/components/AuthLayout';
-import { Home } from '../modules/main/pages/Home';
 import { MainLayout } from '../global/components/organism/MainLayout';
+import { HomePage } from '../modules/main/pages/HomePage';
+import { ProfileUserPage } from '../modules/users/pages/ProfileUserPage';
 
 export const AppRouter = () => {
 
@@ -18,9 +19,9 @@ export const AppRouter = () => {
 
               {/* Paginas con navbar */}
               <Route element={<MainLayout/>} >
-                <Route path='/home' element={<Home/>} />
+                <Route path='/home' element={<HomePage/>} />
+                <Route path='/profile' element={<ProfileUserPage/>} />
               </Route>
-
 
             </Route>
 
