@@ -1,33 +1,12 @@
-import React, { useState } from "react"
+import { PageWrapper } from "../../../global/utils/PageWrapper"
 
 export const HomePage = () => {
-  console.log("Home")
 
   return (
-    <div>
-
-      <div className="bg-blue-300 h-96 " >
-Hola
-      </div>
-      <div className="bg-blue-300 h-96" >
-Hola
-      </div>
-      <div className="bg-blue-300 h-96" >
-Hola
-      </div>
-      <div className="bg-blue-300 h-96" >
-Hola
-      </div>
-      <div className="bg-blue-300 h-96" >
-Hola
-      </div>
-      <div className="bg-blue-300 h-96" >
-Hola
-      </div>
-      <div className="bg-blue-300 h-96" >
-Hola
-      </div>
-
-    </div>
+      <PageWrapper>
+        <div className="bg-lightbg">
+            <h1>Hola</h1>
+        </div>
+      </PageWrapper>
   )
 }

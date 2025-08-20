@@ -1,11 +1,13 @@
-import React from 'react'
 import { ProfileHeader } from '../components/ProfileHeader'
+import { PageWrapper } from '../../../global/utils/PageWrapper'
 
 export const ProfileUserPage = () => {
 
   return (
-    <div>
-      <ProfileHeader/>
-    </div>
+    <PageWrapper>
+      <div className='bg-lightbg'>
+          <ProfileHeader/>
+      </div>
+    </PageWrapper>
   )
 }

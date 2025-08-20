@@ -18,8 +18,8 @@ const validationSchema = Yup.object({
   password2: Yup.string()
   .oneOf([Yup.ref('password'), undefined], "Las contraseñas no coinciden")
   .required("Campo requerido"),
-  first_name: Yup.string(),
-  last_name: Yup.string(),
+  first_name: Yup.string().required("Campo requerido"),
+  last_name: Yup.string().required("Campo requerido"),
 })
 
 const initialValues = {
