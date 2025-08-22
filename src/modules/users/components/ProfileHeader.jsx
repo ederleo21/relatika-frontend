@@ -44,7 +44,7 @@ export const ProfileHeader = () => {
                     <IconAnimation onClick={() => setIsOpen(true)}>
                       <FaRegEdit/>
                     </IconAnimation>
-                    <ProfileUpdateForm isOpen={isOpen} onClose={() => setIsOpen(false)} title="Actualizar perfil"/>
+                    <ProfileUpdateForm isOpen={isOpen} onClose={() => setIsOpen(false)} title="Actualizar perfil" authUser={authUser}/>
                 </div>
               </div>
             </div>

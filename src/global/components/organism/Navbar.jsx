@@ -2,8 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiSettings, FiLogOut, FiHome, FiMessageSquare, FiUser } from "react-icons/fi";
-import img from '../../../assets/icon_relatikaa.png'
 
+import img from '../../../assets/icon_relatikaa.png'
 import { handleLogout } from '../../../modules/auth/logic/handleLogout';
 
 export const Navbar = () => {
