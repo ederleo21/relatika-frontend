@@ -9,5 +9,9 @@ export const endpoints = {
     },
     users: {
         profile: "/users/profile/", //get, update, delete de user auth
+    },
+    posts: {
+        createPost: "/posts/posts/",
+        listPost: "/post/posts/"
     }
 }

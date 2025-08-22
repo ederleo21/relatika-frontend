@@ -13,7 +13,7 @@ export const MainLayout = () => {
         </header>
 
         <AnimatePresence mode="wait">
-          <main className='pt-[150px] md:pt-[118px]'>
+          <main className='pt-[155px] sm:pt-[106px] md:pt-[119px]'>
                <Outlet key={location.pathname} />
            </main>
         </AnimatePresence>

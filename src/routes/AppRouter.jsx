@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { RegisterAndLogin } from '../modules/auth/pages/RegisterAndLoginPage'
 import { AuthLayout } from '../modules/auth/components/AuthLayout';
-import { MainLayout } from '../global/components/organism/MainLayout';
+import { MainLayout } from '../global/components/layout/MainLayout';
 import { HomePage } from '../modules/main/pages/HomePage';
 import { ProfileUserPage } from '../modules/users/pages/ProfileUserPage';
 

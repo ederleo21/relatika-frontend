@@ -20,12 +20,9 @@ const initialValues = {
 export const LoginForm = () => {
   const navigate = useNavigate();
   
-  const handleSubmit = (values, actions) => {
-      handleFormSubmit({values, 
-                        requestFn: loginUser, 
-                        messageSuccess: "Bienvenido a Relatika!",
-                        onSuccess: () => navigate("/home")
-                      }, actions)
+  const handleSubmit = async(values, actions) => {
+      const { success } = await handleFormSubmit({values, requestFn: loginUser, messageSuccess: "Bienvenido a Relatika!"}, actions)
+      if(success) navigate("/home")
   }
 
   return (
