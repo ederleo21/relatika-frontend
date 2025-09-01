@@ -8,7 +8,8 @@ export const endpoints = {
         logout: "/auth/logout/",
     },
     users: {
-        profile: "/users/profile/", //get, update, delete de user auth
+        profile: "/users/profile/", //get, update, delete de user autenticado
+        user: "/users/user/" //perfil de un usuario (solo lectura)
     },
     posts: {
         createPost: "/posts/posts/",

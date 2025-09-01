@@ -21,6 +21,7 @@ export const AppRouter = () => {
               <Route element={<MainLayout/>} >
                 <Route path='/home' element={<HomePage/>} />
                 <Route path='/profile' element={<ProfileUserPage/>} />
+                <Route path='/user/:id' element={<ProfileUserPage/>} />
               </Route>
 
             </Route>

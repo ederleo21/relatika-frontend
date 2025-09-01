@@ -1,13 +1,17 @@
-import { ProfileHeader } from '../components/ProfileHeader'
+import { useLocation } from 'react-router-dom'
+
+import { ProfileUserHeader } from '../components/ProfileUserHeader'
 import { PageWrapper } from '../../../global/components/layout/PageWrapper'
 import ThreeColumnsLayout from '../../../global/components/layout/ThreeColumnsLayout'
 import { ActionPanel } from '../../../global/components/layout/ActionPanel'
 
 export const ProfileUserPage = () => {
+  const location = useLocation();
+  const isProfile = location.pathname == "/profile";
 
   return (
     <PageWrapper>
-          <ProfileHeader/>
+          <ProfileUserHeader isProfile={isProfile} />
           <ThreeColumnsLayout>
 
             <ThreeColumnsLayout.Left>

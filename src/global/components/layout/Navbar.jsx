@@ -45,7 +45,9 @@ export const Navbar = () => {
           <div className="flex flex-wrap sm:flex-nowrap items-center space-x-2 md:space-x-6 mt-2 sm:mt-0">
             <div className="flex items-center space-x-2">
               <img src={authUser.avatar} alt="user" className="w-8 h-10 rounded-full border border-greybg" />
-              <span className="text-base text-lighttext truncate">{authUser.username}</span>
+              <Link to="/profile">
+                <span className="text-base text-lighttext truncate">{authUser.username}</span>
+              </Link>
             </div>
             <Link
               to="/settings"
@@ -82,15 +84,12 @@ export const Navbar = () => {
               >
                 <FiMessageSquare />
               </Link>
-            </li>
-            <li>
-              <Link
-                to="/profile"
-                className={`transition-colors ${activePath === "/profile" ? "text-indigo_light" : "hover:text-indigo_light"}`}
-              >
-                <FiUser />
-              </Link>
-            </li>
+            </li> 
+            {(activePath == "/profile" || activePath.startsWith("/user")) && (
+              <li>
+                <FiUser className="text-indigo_light" />
+              </li>)
+            }
           </ul>
         </div>
       </nav>
