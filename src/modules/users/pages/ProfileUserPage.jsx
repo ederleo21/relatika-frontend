@@ -6,10 +6,10 @@ import { ProfileUserHeader } from '../components/ProfileUserHeader'
 import { PageWrapper } from '../../../global/components/layout/PageWrapper'
 import ThreeColumnsLayout from '../../../global/components/layout/ThreeColumnsLayout'
 import { ActionPanel } from '../../../global/components/layout/ActionPanel'
-import { PageLoader } from '../../../global/components/atoms/PageLoader'
 import { ErrorState } from '../../../global/components/layout/ErrorState'
-import { setLoading, setError, upsertUser } from '../slices/usersSlice'
+import { setLoading, setError, upsertUser, selectUserById } from '../slices/usersSlice'
 import { getUser } from '../services/usersServices'
+import { parseError } from '../../../global/utils/parseError'
 
 export const ProfileUserPage = () => {
   const location = useLocation();
@@ -19,28 +19,32 @@ export const ProfileUserPage = () => {
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const existingUser = useSelector(state => selectUserById(state, id))
 
   useEffect(() => {
       if(isProfile){
+        if(error) dispatch(setError(null))
         setUser(authUser)
-      }else{
+      }else if(!existingUser){
         dispatch(setLoading())
         const fetchUser = async() => {
           try{
             const res = await getUser(id);
             setUser(res);
-            dispatch(upsertUser(res))
+            dispatch(upsertUser(res));
           }catch(err){
-            dispatch(setError({status: err.status || 500, message: err.response.data.detail || "Error inesperado"}))
+            dispatch(setError(parseError(err)));
           }
         }
         fetchUser()
+      }else{
+        setUser(existingUser)
       }
     }, [isProfile, authUser, id, dispatch])
-
-  if(loading) return <PageLoader/>
-  if(error) return <ErrorState error={error}/>
-  if(!user) return null
+    
+    if(loading) return null
+    if(error) return <ErrorState error={error}/>
+    if(!user) return null
 
   return (
     <PageWrapper>

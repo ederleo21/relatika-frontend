@@ -23,11 +23,11 @@ export const ProfileUserStatsAndFriends = () => {
           <h2 className="text-lg font-semibold text-darktext mb-4">Amigos Destacados</h2>
           <div className="flex space-x-4 overflow-x-auto pb-2">
             {[
-              { name: "María López", username: "mlopez", avatar: "https://i.pravatar.cc/150?img=5" },
-              { name: "Carlos Pérez", username: "cperez", avatar: "https://i.pravatar.cc/150?img=10" },
-              { name: "Lucía Gómez", username: "lgomez", avatar: "https://i.pravatar.cc/150?img=15" },
-              { name: "Andrés Díaz", username: "adiaz", avatar: "https://i.pravatar.cc/150?img=20" },
-              { name: "Sofía Ramírez", username: "sramirez", avatar: "https://i.pravatar.cc/150?img=25" },
+              { name: "María López", username: "mlopez", avatar: "https://i.pravatar.cc/150?img=5"},
+              { name: "Carlos Pérez", username: "cperez", avatar: "https://i.pravatar.cc/150?img=10"},
+              { name: "Lucía Gómez", username: "lgomez", avatar: "https://i.pravatar.cc/150?img=15"},
+              { name: "Andrés Díaz", username: "adiaz", avatar: "https://i.pravatar.cc/150?img=20"},
+              { name: "Sofía Ramírez", username: "sramirez", avatar: "https://i.pravatar.cc/150?img=25"},
             ].map((friend, i) => (
               <div
                 key={i}
