@@ -1,11 +1,9 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 
-//Como identificar cada identidad (por id)
 const usersAdapter = createEntityAdapter({
    selectId: (item) => item.id, 
 });
 
-//crea ids y entities
 const initialState = usersAdapter.getInitialState({
     loading: false,
     error: null,

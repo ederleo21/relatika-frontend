@@ -27,12 +27,19 @@ export const ProfileUserMainInfo = ({ user, isProfile }) => {
                 <FaRegEdit className="text-2xl sm:text-3xl" />
               </button>
             </div>
-            <div className="flex-1 min-w-0 text-center sm:text-left">
-              <h1 className="text-3xl font-bold text-darktext font-lora truncate">
-                {first_name || "Sin nombre"} {last_name || ""}
-              </h1>
-              <p className="text-lg text-lighttext truncate pt-2">{username || "Sin username"}</p>
-            </div>
+<div className="flex flex-wrap items-center gap-2 w-full min-w-0">
+  <div className="flex-1 min-w-0">
+    <h1 className="text-3xl font-bold text-darktext font-lora break-words">
+      {first_name || "Sin nombre"} {last_name || ""}
+    </h1>
+    <p className="text-lg text-lighttext pt-2 break-words">{username || "Sin username"}</p>
+  </div>
+  <div className="flex-shrink-0 w-full sm:w-auto">
+    <button className="w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 bg-indigo-500 text-white rounded-full shadow hover:bg-indigo-600 transition">
+      Siguiendo
+    </button>
+  </div>
+</div>
             <div className="hidden sm:flex sm:self-start sm:justify-end">
                 {isProfile && (
                   <IconAnimation onClick={() => setIsOpen(true)}>
