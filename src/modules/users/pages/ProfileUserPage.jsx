@@ -20,6 +20,7 @@ export const ProfileUserPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const existingUser = useSelector(state => selectUserById(state, id))
+  console.log(authUser)
 
   useEffect(() => {
       if(isProfile){

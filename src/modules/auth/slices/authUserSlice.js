@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     authUser: null,
+    followingIds: [],
     loading: false,
     error: null
 }
@@ -11,7 +12,9 @@ const authUserSlice = createSlice({
     initialState,
     reducers: {
         setAuthUser(state, action){
-            state.authUser = action.payload;
+            const { following, ...userData } = action.payload;
+            state.authUser = userData;
+            state.followingIds = following || []
             state.loading = false;
             state.error = null;
         },
