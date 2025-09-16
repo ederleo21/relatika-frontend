@@ -18,6 +18,12 @@ const authUserSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
+        addIdFollowing(state, action){
+            state.followingIds.push(action.payload)
+        },
+        removeIdFollowing(state, action){
+            state.followingIds = state.followingIds.filter(id => id != action.payload)
+        },
         setLoading(state){
             state.loading = true;
             state.error = null;
@@ -34,5 +40,5 @@ const authUserSlice = createSlice({
     }
 })
 
-export const { setAuthUser, setLoading, setError, clearAuthUser } = authUserSlice.actions;
+export const { setAuthUser, addIdFollowing, removeIdFollowing, setLoading, setError, clearAuthUser } = authUserSlice.actions;
 export default authUserSlice.reducer;

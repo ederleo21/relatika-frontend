@@ -13,14 +13,13 @@ import { parseError } from '../../../global/utils/parseError'
 
 export const ProfileUserPage = () => {
   const location = useLocation();
-  const isProfile = location.pathname == "/profile";
   const authUser = useSelector(state => state.authUser.authUser)
   const { loading, error } = useSelector(state => state.users)
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const { id } = useParams();
   const existingUser = useSelector(state => selectUserById(state, id))
-  console.log(authUser)
+  const isProfile = location.pathname == "/profile" || id === String(authUser.id);
 
   useEffect(() => {
       if(isProfile){

@@ -4,17 +4,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { IconAnimation } from "../../../global/components/atoms/IconAnimation";
 import { ProfileUpdateForm } from "./ProfileUpdateForm";
 
-export const ProfileUserMainInfo = ({ user, isProfile, isFollowing }) => {
+export const ProfileUserMainInfo = ({ user, isProfile, isFollowing, handleFollow }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const {first_name, last_name, email, username, avatar, bio, birth_date} = user || {};
-
-    const handleFollow = () => {
-      if(isFollowing){
-        console.log("Dejadooo")
-      }else{  
-        console.log("Seguidooo")
-      }
-    }
+    const {id, first_name, last_name, email, username, avatar, bio, birth_date} = user || {};
 
   return (
     <div className="flex-1 flex flex-col space-y-6 min-w-0">
@@ -44,7 +36,7 @@ export const ProfileUserMainInfo = ({ user, isProfile, isFollowing }) => {
               </div>
               {!isProfile && (
                 <div className="flex-shrink-0 w-full sm:w-auto">
-                  <button onClick={handleFollow} className={`w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 rounded-full shadow ${isFollowing ? "bg-gray-300 text-gray-700 hover:bg-gray-400" : "bg-indigo-500 text-white hover:bg-indigo-600"}`}>
+                  <button onClick={() => handleFollow(user)} className={`w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 rounded-full shadow ${isFollowing ? "bg-gray-300 text-gray-700 hover:bg-gray-400" : "bg-indigo-500 text-white hover:bg-indigo-600"}`}>
                       {isFollowing ? "Siguiendo" : "Seguir"}
                   </button>
                 </div>
