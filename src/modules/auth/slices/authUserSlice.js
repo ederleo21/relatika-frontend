@@ -20,9 +20,11 @@ const authUserSlice = createSlice({
         },
         addIdFollowing(state, action){
             state.followingIds.push(action.payload)
+            state.authUser.following_count += 1
         },
         removeIdFollowing(state, action){
             state.followingIds = state.followingIds.filter(id => id != action.payload)
+            state.authUser.following_count -= 1
         },
         setLoading(state){
             state.loading = true;
