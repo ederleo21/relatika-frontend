@@ -11,7 +11,6 @@ export const ProfileUserHeader = ({ isProfile, user }) => {
   const followingIds = useSelector(state => state.authUser.followingIds)
   const isFollowing = followingIds.includes(user.id)
   const dispatch = useDispatch();
-  console.log("render")
 
   const handleFollow = async(user) => {
     try{

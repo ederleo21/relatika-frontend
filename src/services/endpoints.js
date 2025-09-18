@@ -9,7 +9,11 @@ export const endpoints = {
     },
     users: {
         profile: "/users/profile/", //get, update, delete de user autenticado
-        user: "/users/user/" //perfil de un usuario (solo lectura)
+        user: "/users/user/", //perfil de un usuario (solo lectura)
+        followUser: "/users/follow/",
+        unFollowUser: "/users/follow/",
+        listFollowers: "/users/followers/",
+        listFollowing: "/users/following/"
     },
     posts: {
         createPost: "/posts/posts/",

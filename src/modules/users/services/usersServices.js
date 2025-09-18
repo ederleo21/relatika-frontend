@@ -6,17 +6,27 @@ export const updateProfile = async(values) => {
     return res.data
 }
 
-export const getUser = async(id) => {
-    const res = await api.get(`${endpoints.users.user}${id}`)
+export const getUser = async(userId) => {
+    const res = await api.get(`${endpoints.users.user}${userId}`)
     return res.data
 }
 
 export const followUser = async(values) => {
-    const res = await api.post("/users/follow/", values)
+    const res = await api.post(endpoints.users.followUser, values)
     return res.data
 }
 
 export const unFollowUser = async(userId) => {
-    const res = await api.delete(`/users/follow/?userId=${userId}`)
+    const res = await api.delete(`${endpoints.users.unFollowUser}?userId=${userId}`)
+    return res.data
+}
+
+export const getListFollowers = async(userId) => {
+    const res = await api.get(`${endpoints.users.listFollowers}${userId}`)
+    return res.data
+}
+
+export const getListFollowing = async(userId) => {
+    const res = await api.get(`${endpoints.users.listFollowing}${userId}`)
     return res.data
 }
