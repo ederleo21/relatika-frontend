@@ -5,6 +5,7 @@ import { AuthLayout } from '../modules/auth/components/AuthLayout';
 import { MainLayout } from '../global/components/layout/MainLayout';
 import { HomePage } from '../modules/main/pages/HomePage';
 import { ProfileUserPage } from '../modules/users/pages/ProfileUserPage';
+import { SearchResultsPage } from '../global/pages/SearchResultsPage';
 
 export const AppRouter = () => {
 
@@ -19,9 +20,15 @@ export const AppRouter = () => {
 
               {/* Paginas con navbar */}
               <Route element={<MainLayout/>} >
+                
+                {/* Global */}
                 <Route path='/home' element={<HomePage/>} />
+                <Route path='/results' element={<SearchResultsPage/>}></Route>
+
+                {/* Users */}
                 <Route path='/profile' element={<ProfileUserPage/>} />
                 <Route path='/user/:id' element={<ProfileUserPage/>} />
+                
               </Route>
 
             </Route>

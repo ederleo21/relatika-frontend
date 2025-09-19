@@ -10,6 +10,7 @@ import { ErrorState } from '../../../global/components/layout/ErrorState'
 import { setLoading, setError, upsertUser, selectUserById } from '../slices/usersSlice'
 import { getUser } from '../services/usersServices'
 import { parseError } from '../../../global/utils/parseError'
+import { PageLoader } from '../../../global/components/atoms/PageLoader'
 
 export const ProfileUserPage = () => {
   const location = useLocation();
@@ -41,10 +42,10 @@ export const ProfileUserPage = () => {
         setUser(existingUser)
       }
     }, [isProfile, authUser, id, dispatch])
-    
-    if(loading) return null
+
+    if(loading) return <PageLoader color='info' />
     if(error) return <ErrorState error={error}/>
-    if(!user) return null
+    if(!user) return <PageLoader color='info' />
 
   return (
     <PageWrapper>

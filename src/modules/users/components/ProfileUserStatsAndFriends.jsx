@@ -23,8 +23,8 @@ export const ProfileUserStatsAndFriends = ({ user }) => {
               { value: "320", label: "Comentarios" },
               { value: "15", label: "Proyectos" },
             ].map((item, i) => (
-              <button onClick={() => {item.details && handleModalList(item.label)}}>
-                <div key={i} className="text-center min-w-0">
+              <button key={i} onClick={() => {item.details && handleModalList(item.label)}}>
+                <div className="text-center min-w-0">
                   <p className="text-2xl font-bold text-indigo-600 truncate">{item.value}</p>
                   <p className="text-sm text-gray-500 truncate">{item.label}</p>
                 </div>

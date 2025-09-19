@@ -7,6 +7,9 @@ export const endpoints = {
         refresh: "/auth/refresh/",
         logout: "/auth/logout/",
     },
+    global: {
+        searchResults: "/users/searchResults/"
+    },
     users: {
         profile: "/users/profile/", //get, update, delete de user autenticado
         user: "/users/user/", //perfil de un usuario (solo lectura)
