@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { useLocation } from 'react-router-dom'
 import { UsersResultsList } from '../../modules/users/components/UsersResultsList';
-import { CategoryFilters } from '../components/layout/CategoryFilters';
+import { CategorySelect } from '../components/layout/CategoryResultsSearch';
 
 export const SearchResultsPage = () => {
   const location = useLocation();
@@ -15,7 +15,7 @@ export const SearchResultsPage = () => {
       <div className="flex gap-6 px-6 py-8">
 
         <div className="w-1/3">
-          <CategoryFilters activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+          <CategorySelect activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
         </div>
 
         <div className="flex-1 flex flex-col gap-6 font-poppins">

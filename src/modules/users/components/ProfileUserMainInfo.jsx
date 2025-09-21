@@ -1,12 +1,15 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux";
 import { FaRegEdit } from "react-icons/fa";
 
 import { IconAnimation } from "../../../global/components/atoms/IconAnimation";
 import { ProfileUpdateForm } from "./ProfileUpdateForm";
+import { handleFollowUser } from "../logic/handleFollowUser";
 
-export const ProfileUserMainInfo = ({ user, isProfile, isFollowing, handleFollow }) => {
+export const ProfileUserMainInfo = ({ user, isProfile, isFollowing }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const {id, first_name, last_name, email, username, avatar, bio, birth_date} = user || {};
+    const {first_name, last_name, email, username, avatar, bio, birth_date} = user || {};
+    const dispatch = useDispatch();
 
   return (
     <div className="flex-1 flex flex-col space-y-6 min-w-0">
@@ -32,11 +35,11 @@ export const ProfileUserMainInfo = ({ user, isProfile, isFollowing, handleFollow
                 <h1 className="text-3xl font-bold text-darktext font-lora break-words">
                   {first_name || "Sin nombre"} {last_name || ""}
                 </h1>
-                <p className="text-lg text-lighttext pt-2 break-words">{username || "Sin username"}</p>
+                <p className="text-lg text-lighttext pt-2 break-words">@{username || "Sin username"}</p>
               </div>
               {!isProfile && (
                 <div className="flex-shrink-0 w-full sm:w-auto">
-                  <button onClick={() => handleFollow(user)} className={`w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 rounded-full shadow ${isFollowing ? "bg-gray-300 text-gray-700 hover:bg-gray-400" : "bg-indigo-500 text-white hover:bg-indigo-600"}`}>
+                  <button onClick={() => handleFollowUser(isFollowing, user, dispatch)} className={`w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 rounded-full shadow ${isFollowing ? "bg-gray-300 text-gray-700 hover:bg-gray-400" : "bg-indigo-500 text-white hover:bg-indigo-600"}`}>
                       {isFollowing ? "Siguiendo" : "Seguir"}
                   </button>
                 </div>

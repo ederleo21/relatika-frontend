@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import { getSearchResults } from '../../../global/services/globalServices'
 import { SectionLoader } from '../../../global/components/atoms/SectionLoader'
 import { CardUser } from './CardUser';
@@ -26,9 +27,13 @@ export const UsersResultsList = ({ query, category }) => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {users.map((user) => (
-        <CardUser user={user}/>
-      ))}
+      {users.length > 0 ?
+        users.map((user) => (
+          <CardUser key={user.id} user={user}/>
+        )) : (
+          "Sin resultados."
+        )
+      }
     </div>
   );
 };
