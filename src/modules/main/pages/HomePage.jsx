@@ -1,6 +1,7 @@
 import { ActionPanel } from "../../../global/components/layout/ActionPanel"
 import { PageWrapper } from "../../../global/components/layout/PageWrapper"
 import ThreeColumnsLayout from "../../../global/components/layout/ThreeColumnsLayout"
+import { PostFeed } from "../../posts/components/PostFeed"
 
 export const HomePage = () => {
 
@@ -14,11 +15,7 @@ export const HomePage = () => {
             </ThreeColumnsLayout.Left>
 
             <ThreeColumnsLayout.Center>
-              <h2 className="text-lg font-bold mb-2">Feed</h2>
-              <div className="space-y-3">
-                <div className="p-3 border rounded">Post 1</div>
-                <div className="p-3 border rounded">Post 2</div>
-              </div>
+              <PostFeed/>
             </ThreeColumnsLayout.Center>
 
             <ThreeColumnsLayout.Right>

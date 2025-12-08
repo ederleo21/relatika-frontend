@@ -20,6 +20,6 @@ export const endpoints = {
     },
     posts: {
         createPost: "/posts/posts/",
-        listPost: "/post/posts/"
+        listPost: "/posts/posts/"
     }
 }

@@ -11,6 +11,7 @@ import { ErrorState } from '../../../global/components/layout/ErrorState'
 import { getUser } from '../services/usersServices'
 import { parseError } from '../../../global/utils/parseError'
 import { PageLoader } from '../../../global/components/atoms/PageLoader'
+import { PostFeed } from '../../posts/components/PostFeed'
 
 export const ProfileUserPage = () => {
   const location = useLocation();
@@ -58,7 +59,7 @@ export const ProfileUserPage = () => {
             </ThreeColumnsLayout.Left>
 
             <ThreeColumnsLayout.Center>
-              <h2 className="text-lg font-bold mb-2">Feed</h2>
+              <PostFeed userId={user.id} />
             </ThreeColumnsLayout.Center>
 
             <ThreeColumnsLayout.Right>
