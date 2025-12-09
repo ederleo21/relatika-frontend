@@ -22,6 +22,7 @@ export const PostFeed = ({ userId = null }) => {
         }
         fetchPost();
     }, []);
+  
   console.log(posts)
   if(loading) return <SectionLoader/>
   if(error) return <h1>Errorcito</h1>
