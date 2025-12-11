@@ -6,8 +6,7 @@ export const createPost = async(values) => {
     return res.data
 }   
 
-export const getListPost = async(userId = null) => {
-    const url = userId ? endpoints.posts.listPost + userId : endpoints.posts.listPost 
+export const getListPost = async(url) => {
     const res = await api.get(url);
     return res.data
 }
