@@ -18,7 +18,7 @@ export const ErrorState = ({ error }) => {
     404: {
       emoji: "🔍",
       title: message,
-      description: "El recurso que buscas no existe o fue movido."
+      description: "El recurso que buscas no fue encontrado o no existe."
     },
     500: {
       emoji: "💥",

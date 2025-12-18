@@ -7,11 +7,11 @@ import { SectionLoader } from "../../../global/components/atoms/SectionLoader";
 import { MiniLoader } from "../../../global/components/layout/MiniLoader";
 import { PostCard } from "./PostCard";
 import { setGeneralFeed, addGeneralFeed, setGeneralLoading, setGeneralError } from "../slices/postSlice";
+import { ErrorState } from "../../../global/components/layout/ErrorState";
 
 export const PostFeed = ({ userId = null }) => {
   const dispatch = useDispatch();
   const { posts, loading, error, nextUrl, hasMore, page } = useSelector((state) => state.posts.generalFeed);
-
   const loaderRef = useRef(null);
 
     //Primera paginacion e indicacion si hay mas (hasMore)
@@ -22,10 +22,9 @@ export const PostFeed = ({ userId = null }) => {
             const url = userId ? endpoints.posts.listPost + userId : endpoints.posts.listPost 
             const res = await getListPost(url);
             dispatch(setGeneralFeed({ posts: res.results, page: 1, nextUrl: res.next}))
-            console.log(res)
            
           }catch(err){
-            dispatch(setGeneralError("Error cargando el feed"))
+            dispatch(setGeneralError({message: err.message, status: err.status}))
            }
         }
         fetchPost();
@@ -33,7 +32,7 @@ export const PostFeed = ({ userId = null }) => {
 
     //Cargar sigueinte pagina cuando loader es visible
     useEffect(() => {
-      if(!hasMore) return null;
+      if(!hasMore) return;
 
       const observer = new IntersectionObserver(
         async (entries) => {
@@ -43,7 +42,7 @@ export const PostFeed = ({ userId = null }) => {
               const res = await getListPost(nextUrl);
               dispatch(addGeneralFeed({ posts: res.results, page: page + 1, nextUrl: res.next }))
             }catch (err){
-              dispatch(setGeneralError("Error cargando mas posts"));
+              dispatch(setGeneralError({message: err.message, status: err.status}));
             }
           }
         },
@@ -58,8 +57,8 @@ export const PostFeed = ({ userId = null }) => {
 
     }, [loaderRef, nextUrl, hasMore, loading]);
   
-  if(error) return <h1> {error} </h1>
-  if(!posts) return null
+  if (error) return <ErrorState error={error} />
+  if (!posts) return null
 
   return (
     <div className="flex flex-col gap-4">
