@@ -63,13 +63,10 @@ export const PostFeed = ({ userId = null }) => {
   return (
     <div className="flex flex-col gap-4">
       {posts.map(post => (
-        <PostCard key={post.id} post={post} />
+        <PostCard key={post.id} post={post}/>
       ))}
 
-      <div
-        ref={loaderRef}
-        className="h-16 flex justify-center items-center"
-      >
+      <div ref={loaderRef} className="h-16 flex justify-center items-center">
         {loading && <MiniLoader />}
       </div>
     </div>

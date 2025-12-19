@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
 
@@ -6,6 +6,7 @@ import { ModalForm } from '../../../global/components/layout/ModalForm'
 import { InputField } from '../../../global/components/atoms/InputField'
 import { handleFormSubmit } from '../../../global/utils/handleFormSubmit'
 import { createPost } from '../services/postServices'
+import { updatePost } from '../services/postServices'
 
 const validationSchema = Yup.object({
     title: Yup.string().required("Escribe un título"),
@@ -13,16 +14,25 @@ const validationSchema = Yup.object({
     post_type: Yup.string().required("Elige un tipo de post"),
 })
 
-export const PostForm = ({ isOpen, onClose }) => {
-
+export const PostForm = ({ isOpen, onClose, isUpdate=false, post=null }) => {
     const [previewImages, setPreviewImages] = useState([]);
 
-    const initialValues = {
-        title: "",
-        content: "",
-        post_type: "",
-        images: []
-    };
+    const [initialValues, setInitialValues] = useState({
+      title: "",
+      content: "",
+      post_type: "",
+      images: []
+    })
+
+    useEffect(() => {
+      if(isUpdate && post){
+        setInitialValues({
+          title: post.title,
+          content: post.content,
+          post_type: post.post_type
+        })
+      }
+    }, [isUpdate, post])
 
     const handleSubmit = async(values, actions) => {
         const formData = new FormData();
@@ -36,7 +46,11 @@ export const PostForm = ({ isOpen, onClose }) => {
             });
         }
 
-        const { success } = await handleFormSubmit({ values: formData, requestFn: createPost, messageSuccess: "Publicación creada!" }, actions);
+        const { success } = await handleFormSubmit({ 
+          requestFn: isUpdate ? updatePost : createPost,
+          values: formData, 
+          idSource: isUpdate ? post.id : null,
+          messageSuccess: isUpdate ? "Publicación actualizada!" : "Publicación creada!" }, actions);
         if (success) onClose();
     };
 
@@ -59,44 +73,24 @@ export const PostForm = ({ isOpen, onClose }) => {
         >
           {({ isSubmitting, setFieldValue }) => (
             <Form>
-              <ModalForm
-                isOpen={isOpen}
-                onClose={onClose}
-                isSubmitting={isSubmitting}
-                title="Crear Nueva Publicación"
-              >
+              <ModalForm isOpen={isOpen} onClose={onClose} isSubmitting={isSubmitting} title="Crear Nueva Publicación">
                 <div className="font-poppins w-full max-w-5xl mx-auto">
-        
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
                     {/* COLUMNA IZQUIERDA */}
                     <div className="flex flex-col gap-3">
-        
-                      {/* Título */}
-                      <InputField
-                        name="title"
-                        label="Título"
-                        placeholder="Título"
-                        className="text-sm py-2.5 px-3 rounded-md border"
-                      />
-        
-                      {/* Tipo de post */}
-                      <InputField
-                        name="post_type"
-                        as="select"
-                        label="Tipo de post"
-                        className="text-sm py-2.5 px-3 rounded-md border"
-                      >
+
+                      <InputField name="title" label="Título" placeholder="Título" className="text-sm py-2.5 px-3 rounded-md border"/>
+                      <InputField name="post_type" as="select" label="Tipo de post" disabled={isUpdate} className="text-sm py-2.5 px-3 rounded-md border">
                         <option value="">Selecciona un tipo</option>
                         <option value="story">Historia</option>
                         <option value="experience">Experiencia</option>
                         <option value="reflection">Reflexión</option>
                       </InputField>
-        
-                      {/* IMÁGENES (igual que antes) */}
+
+                      {!isUpdate && (
                       <div className="flex flex-col gap-1">
                         <label className="text-sm font-medium">Imágenes</label>
-        
                         <label className="cursor-pointer bg-gray-100 hover:bg-gray-200 border rounded-lg py-2 px-3 w-fit text-sm text-gray-700 transition">
                           Seleccionar imágenes
                           <input
@@ -131,7 +125,8 @@ export const PostForm = ({ isOpen, onClose }) => {
                           </div>
                         )}
                       </div>
-                    
+                      )}
+
                     </div>
                     
                     {/* COLUMNA DERECHA */}
@@ -141,7 +136,8 @@ export const PostForm = ({ isOpen, onClose }) => {
                         label="Contenido"
                         placeholder="Escribe aquí tu publicación..."
                         as="textarea"
-                        className="text-sm p-4 h-[420px] rounded-md border resize-none leading-relaxed"
+                        className="p-4 rounded-md border"
+                        inputClassName='h-[350px] w-[450px] '
                       />
                     </div>
                     

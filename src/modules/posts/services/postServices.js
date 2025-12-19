@@ -10,3 +10,8 @@ export const getListPost = async(url) => {
     const res = await api.get(url);
     return res.data
 }
+
+export const updatePost = async(postId, values) => {
+    const res = await api.patch(`${endpoints.posts.updatePost}${postId}/` , values);
+    return res.data
+}

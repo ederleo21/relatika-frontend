@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux'
+import { BsThreeDots } from "react-icons/bs";
+import { PostForm } from "./PostForm";
 
 export const PostCard = ({ post }) => {
   
   const images = post.images || [];
   const [showModal, setShowModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setShowModal(true);
+  const idAuthUser = useSelector((state) => state.authUser.authUser?.id);
 
   const postTypeStyles = {
     story: {
@@ -53,11 +58,20 @@ export const PostCard = ({ post }) => {
                 </span>
               </div>
             </div>
-      
-            {/* Date */}
-            <span className="text-lighttext text-sm shrink-0 whitespace-nowrap">
-              {new Date(post.created_at).toLocaleDateString()}
-            </span>
+
+            <div className="flex flex-col items-center gap-3">
+              {/* Icon edit */}
+              {idAuthUser === post?.user?.id && (
+                <button className="text-xl" onClick={() => setIsOpen(true)}>
+                    <BsThreeDots/>
+                </button>
+              )}
+
+              {/* Date */}
+              <span className="text-lighttext text-sm shrink-0 whitespace-nowrap">
+                {new Date(post.created_at).toLocaleDateString()}
+              </span>
+            </div>
           </div>
       
           {/* Divider */}
@@ -132,6 +146,7 @@ export const PostCard = ({ post }) => {
           {/* Extra spacing bottom */}
           <div className="mt-4"></div>
         </div>
+        {isOpen && <PostForm isOpen={isOpen} onClose={() => setIsOpen(false)} isUpdate={true} post={post}/>}
       </>
     );
   };
