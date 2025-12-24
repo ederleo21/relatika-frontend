@@ -21,6 +21,8 @@ export const endpoints = {
     posts: {
         createPost: "/posts/posts/",
         listPost: "/posts/posts/",
-        updatePost: "/posts/post/"
+        updatePost: "/posts/post/",
+        detailPost: "posts/post/",
+        deletePost: "/posts/post/"
     }
 }

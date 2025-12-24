@@ -2,7 +2,7 @@ import { toast } from "react-toastify"
 
 //Helper para creacion  y actualizacion de recursos
 export const handleFormSubmit = async({ requestFn, values, idSource=null, messageSuccess="Operación exitosa"}, actions) => {
-    const { resetForm, setErrors, setSubmitting } = actions;
+    const { setErrors, setSubmitting } = actions;
 
     try{
         let res

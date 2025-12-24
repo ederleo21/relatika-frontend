@@ -15,3 +15,8 @@ export const updatePost = async(postId, values) => {
     const res = await api.patch(`${endpoints.posts.updatePost}${postId}/` , values);
     return res.data
 }
+
+export const deletePost = async(postId) => {
+    const res = await api.delete(`${endpoints.posts.deletePost}${postId}/`)
+    return res.data
+}
