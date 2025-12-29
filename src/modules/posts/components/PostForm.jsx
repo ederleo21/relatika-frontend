@@ -73,7 +73,7 @@ export const PostForm = ({ isOpen, onClose, isUpdate=false, post=null }) => {
         >
           {({ isSubmitting, setFieldValue }) => (
             <Form>
-              <ModalForm isOpen={isOpen} onClose={onClose} isSubmitting={isSubmitting} title="Crear Nueva Publicación">
+              <ModalForm isOpen={isOpen} onClose={onClose} isSubmitting={isSubmitting} title={isUpdate ? "Actualizar Publicación" : "Crear Nueva Publicación"}>
                 <div className="font-poppins w-full max-w-5xl mx-auto">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         

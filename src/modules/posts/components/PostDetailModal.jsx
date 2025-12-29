@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ModalContent } from "../../../global/components/layout/ModalContent";
+import { ModalGallery } from "./ModalGallery";
 
 export const PostDetailModal = ({ onClose, post }) => {
   const images = post.images || [];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
 
   const prevImage = () => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
@@ -51,12 +53,14 @@ export const PostDetailModal = ({ onClose, post }) => {
           <div className="flex flex-col items-center space-y-4">
             <div className="flex gap-4">
               {imagesToShow.map((img, idx) => (
+              <button onClick={() => setShowGalleryModal(true)}>
                 <img
                   key={idx}
                   src={img.image}
                   alt={`post-img-${idx}`}
                   className="w-32 h-32 object-cover rounded-xl shadow-md border border-gray-500"
                 />
+              </button>
               ))}
             </div>
 
@@ -80,6 +84,7 @@ export const PostDetailModal = ({ onClose, post }) => {
           </div>
         )}
       </div>
+      {showGalleryModal && (<ModalGallery images={images} onClose={() => setShowGalleryModal(false)} />)}
     </ModalContent>
   );
 };
