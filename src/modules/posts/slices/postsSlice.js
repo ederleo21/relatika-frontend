@@ -7,7 +7,7 @@ const postsSlice = createSlice({
         allIds: []
     },
     reducers: {
-        setPosts(state, action){
+        addPosts(state, action){
             action.payload.forEach(post => {
                 if(!state.byId[post.id]){
                     state.byId[post.id] = post;
@@ -18,7 +18,7 @@ const postsSlice = createSlice({
     }
 })
 
-export const { setPosts } = postsSlice.actions;
+export const { addPosts } = postsSlice.actions;
 export default postsSlice.reducer;
 
 

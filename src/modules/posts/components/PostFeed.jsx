@@ -1,27 +1,42 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { endpoints } from "../../../services/endpoints";
 import { getListPost } from "../services/postServices";
-import { setPosts } from "../slices/postsSlice";
-import { setUserFeed, setGlobalFeed, startGlobalFeed, setGlobalFeedError } from "../slices/feedsSlice";
+import { addPosts } from "../slices/postsSlice";
+import { setUserFeed, setGlobalFeed, startGlobalFeed, setGlobalFeedError, startUserFeed, setUserFeedError, feedState } from "../slices/feedsSlice";
 import { useDispatch, useSelector } from 'react-redux'
+import { PostCard } from "./PostCard";
+import { ErrorState } from "../../../global/components/layout/ErrorState";
 
-export const PostFeed = ({ userId = null }) => {
-  const { ids, loading, error } = useSelector(state => state.feeds.global) //loadign global
+export const PostFeed = ({ userId=null }) => {
+
+  const { ids, loading, error } = useSelector(state => {
+    if(userId) return state.feeds.byUser[userId] || feedState
+    return state.feeds.global
+  }) 
+
+  const postsById = useSelector(state => state.posts.byId)
+  const posts = useMemo(() => {
+    return ids.map(id => postsById[id]).filter(Boolean)
+  }, [ids, postsById])
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(ids?.length > 0) return; //no hacer llamadas si hay ids de ese usuario o el global
+
     const fetchPosts = async() => {
       try{
-        //Manejo de loading si es global o si es de usuario
-        if(!userId){
+        if (userId){
+          dispatch(startUserFeed(userId));
+        }else {
           dispatch(startGlobalFeed());
         }
 
         let url = userId ? `${endpoints.posts.listPost}${userId}/` : endpoints.posts.listPost
         const res = await getListPost(url);
-        dispatch(setPosts(res.results))
+        dispatch(addPosts(res.results))
+        
         const ids = res.results.map(post => post.id);
-
         if(userId){
           dispatch(setUserFeed({ userId, ids }))
         }else{
@@ -29,16 +44,24 @@ export const PostFeed = ({ userId = null }) => {
         }
 
       }catch(error){
-        console.log(error)
-
+        if(userId){
+          dispatch(setUserFeedError({ userId, error }))
+        }else{
+          dispatch(setGlobalFeedError(error))
+        }
       }
     }
     fetchPosts();
-  }, [userId])
+  }, [userId, ids, dispatch])
+
+  if(loading) return <h1>Cargandoo</h1>
+  if(error) return <ErrorState error={{ status: error.status, message: error.message }} />
 
   return (
     <div className="flex flex-col gap-4">
-      {loading && ( <h1 className="text-3xl font-bold" >Cranagooooo</h1> )}
+      {posts.map(post => (
+        <PostCard key={post.id} post={post}/>
+      ))}
     </div>
   )
 }
